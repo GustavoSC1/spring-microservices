@@ -1,4 +1,4 @@
-package com.gustavo.greetingservice;
+package com.gustavo.greetingservice.model;
 
 public class Greeting {
 	
