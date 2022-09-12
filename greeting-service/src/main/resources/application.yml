@@ -2,6 +2,15 @@ sprint:
   application:
     name: greeting-service
 
+# Expõe todos os endpoints do Spring Boot Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - '*'
+  
+
 greeting-service:
   greeting: "Olá"
   default-value: "Mundo"
