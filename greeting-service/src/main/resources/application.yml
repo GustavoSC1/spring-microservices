@@ -1,8 +1,9 @@
-sprint:
+spring:
   application:
     name: greeting-service
 
 # Expõe todos os endpoints do Spring Boot Actuator
+# O Actuator mostra informações sobre a saúde de uma aplicação, logs, dentre outras funcionalidades
 management:
   endpoints:
     web:
@@ -10,7 +11,6 @@ management:
         include:
         - '*'
   
-
 greeting-service:
   greeting: "Olá"
   default-value: "Mundo"
