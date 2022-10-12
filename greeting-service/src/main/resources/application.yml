@@ -4,7 +4,7 @@ spring:
   application:
     name: greeting-service
   config:
-    import: optional:configserver:http://localhost:8888/
+    import: optional:configserver:http://localhost:8888/ # "optional:" Se não encontrar ele não vai falhar 
   cloud:
     config:
       profile: prod
@@ -17,7 +17,8 @@ management:
       exposure:
         include:
         - '*'
-  
+
+# Se o configserver nao funcionar, então será usado esse config default 
 greeting-service:
   greeting: "Olá"
   default-value: "Mundo"
