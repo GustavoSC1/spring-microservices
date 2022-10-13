@@ -41,6 +41,10 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- 
+			https://martinfowler.com/articles/evodb.html
+			https://github.com/flyway/flyway
+		 -->
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
