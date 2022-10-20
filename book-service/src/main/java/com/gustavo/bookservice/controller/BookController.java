@@ -1,6 +1,5 @@
 package com.gustavo.bookservice.controller;
 
-import java.util.HashMap;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import com.gustavo.bookservice.model.Book;
+import com.gustavo.bookservice.proxy.CambioProxy;
 import com.gustavo.bookservice.repository.BookRepository;
-import com.gustavo.bookservice.response.Cambio;
 
 @RestController
 @RequestMapping("book-service")
@@ -25,6 +23,26 @@ public class BookController {
 	@Autowired
 	private BookRepository repository;
 	
+	@Autowired
+	private CambioProxy proxy;
+	
+	@GetMapping(value = "/{id}/{currency}")
+	public Book findBook(@PathVariable("id") Long id, @PathVariable("currency") String currency) {
+		
+		Optional<Book> optionalBook = repository.findById(id);
+		
+		Book book = optionalBook.orElseThrow(() -> new RuntimeException("Book not found"));
+				
+		var cambio = proxy.getCambio(book.getPrice(), "USD", currency);
+		
+		var port = enviroment.getProperty("local.server.port");
+		
+		book.setEnvironment(port + " FEIGN");
+		book.setPrice(cambio.getConvertedValue());
+		return book;
+	}
+	
+	/*
 	@GetMapping(value = "/{id}/{currency}")
 	public Book findBook(@PathVariable("id") Long id, @PathVariable("currency") String currency) {
 		
@@ -49,6 +67,7 @@ public class BookController {
 		book.setEnvironment(port);
 		book.setPrice(cambio.getConvertedValue());
 		return book;
-	}
+	} 
+	*/
 
 }
