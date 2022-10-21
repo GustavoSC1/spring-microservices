@@ -1,0 +1,10 @@
+server:
+  port: 8761
+spring:
+  application:
+    name: naming-server
+eureka:
+  client:
+    register-with-eureka: false # Impede que o Eukera se auto registre, quando se tem mais de uma instância do eureka ->
+    fetch-registry: false       # -> para que essas instâncias se encontrem. Em produção o idual é retirar essa configuração
+  
