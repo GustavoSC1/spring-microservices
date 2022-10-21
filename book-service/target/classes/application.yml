@@ -1,5 +1,9 @@
 server:
   port: 8100
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
 spring:
   application:
     name: book-service
@@ -7,7 +11,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/book_service?useTimezone=true&serverTimezone=UTC
     username: root
-    password: admin123
+    password: 
   jackson:
     default-property-inclusion: NON_NULL # Não irá serializar uma propriedade JSON null
     serialization:
@@ -23,5 +27,5 @@ spring:
     url: jdbc:mysql://localhost:3306/
     schemas: book_service
     user: root
-    password: admin123
+    password: 
   
