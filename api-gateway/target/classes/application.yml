@@ -11,5 +11,5 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true # Indica que o gateway habilita a função de registro e descoberta de serviço, e o spring cloud gateway cria automaticamente um roteador para cada serviço com base na descoberta de serviço, e esse roteador irá comece com o nome do serviço.
+          enabled: true # Configura o Gateway para criar rotas automaticamente com base em serviços registrados com clientes de descoberta como o Eureka
           lower-case-service-id: true
