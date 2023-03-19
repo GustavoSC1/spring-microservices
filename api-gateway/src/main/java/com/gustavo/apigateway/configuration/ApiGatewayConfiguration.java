@@ -1,11 +1,6 @@
 package com.gustavo.apigateway.configuration;
 
-import java.util.function.Function;
-
-import org.springframework.cloud.gateway.route.Route;
 import org.springframework.cloud.gateway.route.RouteLocator;
-import org.springframework.cloud.gateway.route.builder.Buildable;
-import org.springframework.cloud.gateway.route.builder.PredicateSpec;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,12 +17,18 @@ public class ApiGatewayConfiguration {
 	// o cabeçalho da solicitação e um parâmetro Hello com o valor World à solicitação antes de ser roteada.
 	@Bean
 	public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
-		Function<PredicateSpec, Buildable<Route>> function = 
-				p -> p.path("/get")
-						.filters(f -> f.addRequestHeader("Hello", "World")
-								.addRequestParameter("Hello", "World"))
-						.uri("http://httpbin.org:80");
-		return builder.routes().route(function).build();
+		return builder.routes().route(p -> p.path("/get")
+				.filters(f -> f.addRequestHeader("Hello", "World")
+						.addRequestParameter("Hello", "World"))
+					.uri("http://httpbin.org:80"))
+				// A aplicação server não faz load balancer, mas os clients incluindo o API Gateway fazem.
+				// Vai até o Eureka e obtém os endereços disponíveis para acessar cada um dos serviços e dentre os quais ele 
+				// poderá distribuir a carga. 
+				.route(p -> p.path("/cambio-service/**")
+						.uri("lb://cambio-service")) 
+				.route(p -> p.path("/book-service/**")
+						.uri("lb://book-service"))
+				.build();
 	}
 
 }

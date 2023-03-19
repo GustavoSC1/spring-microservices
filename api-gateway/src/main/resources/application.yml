@@ -7,9 +7,9 @@ eureka:
 spring:
   application:
     name: api-gateway
-  cloud:
-    gateway:
-      discovery:
-        locator:
-          enabled: true # Configura o Gateway para criar rotas automaticamente com base em serviços registrados com clientes de descoberta como o Eureka
-          lower-case-service-id: true
+  #cloud:
+    #gateway:
+      #discovery:
+        #locator:
+          #enabled: true # Configura o Gateway para criar rotas automaticamente com base em serviços registrados com clientes de descoberta como o Eureka
+          #lower-case-service-id: true
