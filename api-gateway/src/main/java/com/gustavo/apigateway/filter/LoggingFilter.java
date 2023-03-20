@@ -9,8 +9,8 @@ import org.springframework.web.server.ServerWebExchange;
 
 import reactor.core.publisher.Mono;
 
-@Component
 // Esses são filtros especiais que são aplicados condicionalmente a todas as rotas.
+@Component
 public class LoggingFilter implements GlobalFilter {
 	
 	private Logger logger = LoggerFactory.getLogger(LoggingFilter.class);
