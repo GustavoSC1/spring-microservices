@@ -5,7 +5,7 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+//@Configuration
 public class ApiGatewayConfiguration {
 	
 	// O método gatewayRouter recebe um RouteLocatorBuilder que pode ser usado para criar rotas. Além de criar rotas, 
@@ -15,6 +15,9 @@ public class ApiGatewayConfiguration {
 	// Foi criadar uma rota que roteia uma solicitação para https://httpbin.org/get quando uma solicitação é 
 	// feita para o Gateway em /get. Em nossa configuração dessa rota, adicionamos um filtro que adiciona 
 	// o cabeçalho da solicitação e um parâmetro Hello com o valor World à solicitação antes de ser roteada.
+	
+	// Obs: Comentado pq foi transferido para o application.yml
+	/*
 	@Bean
 	public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
 		return builder.routes().route(p -> p.path("/get")
@@ -30,5 +33,5 @@ public class ApiGatewayConfiguration {
 						.uri("lb://book-service"))
 				.build();
 	}
-
+	*/
 }
