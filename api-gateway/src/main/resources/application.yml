@@ -27,4 +27,4 @@ spring:
         predicates:
         - Path=/v3/api-docs/**
         filters:
-        - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+        - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs # Rescreve o caminho /v3/api-docs/{SERVICE_NAME} como /{SERVICE_NAME}/v3/api-docs,
