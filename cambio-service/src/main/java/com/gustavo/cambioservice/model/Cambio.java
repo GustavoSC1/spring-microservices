@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
-@Entity
+@Entity(name = "cambio")
 public class Cambio implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
