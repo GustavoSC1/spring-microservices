@@ -65,6 +65,7 @@ services:
       - 8761:8761
     networks:
       - microservices-network
+      
   api-gateway:
     image: gustavosc1/api-gateway:0.0.1-SNAPSHOT
     ports:
@@ -132,6 +133,7 @@ services:
       - rabbit-mq
     networks:
       - microservices-network
+      
 networks:
   microservices-network:
     driver: bridge

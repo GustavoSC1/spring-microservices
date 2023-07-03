@@ -19,10 +19,11 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
-  sleuth:
-    sampler:
+management:
+  tracing:
+    sampling:
       probability: 1.0 # Porcentagem de informações que serão feitas log (1.0 = 100%) Obs: Em produção deve ser 0.05
 springdoc:
   #show-actuator: true
   api-docs:
-    path: cambio-service/v3/api-docs
+    path: /cambio-service/v3/api-docs

@@ -12,11 +12,10 @@ spring:
       discovery:
         locator:
           enabled: true # Configura o Gateway para criar rotas automaticamente com base em serviços registrados com clientes de descoberta como o Eureka
-          #lower-case-service-id: true
       routes:
-      - id: cambio-service
-        uri: lb://cambio-service
-        predicates:
+      - id: cambio-service # Apenas o identificador
+        uri: lb://cambio-service # URI de destino
+        predicates: #  Define as condições que devem ser atendidas para ativar esta rota. 
         - Path=/cambio-service/**
       - id: book-service
         uri: lb://book-service
@@ -27,7 +26,12 @@ spring:
         predicates:
         - Path=/v3/api-docs/**
         filters:
+        # O caminho da API como /v3/api-docs/{SERVICE_NAME} não é exatamente o que queremos alcançar, 
+        # porque nosso roteamento para os serviços downstream é baseado no nome do serviço buscado na 
+        # descoberta. Portanto, se você chamar um endereço como http://localhost:8060/book-servie/**, a 
+        # carga será automaticamente balanceada entre todas as instâncias registradas do book-service. 
         - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs # Rescreve o caminho /v3/api-docs/{SERVICE_NAME} como /{SERVICE_NAME}/v3/api-docs,
-  sleuth:
-    sampler:
+management:
+  tracing:
+    sampling:
       probability: 1.0 # Porcentagem de informações que serão feitas log (1.0 = 100%) Obs: Em produção deve ser 0.05
